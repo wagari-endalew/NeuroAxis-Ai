@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAxis AI — Master AI, ML & Agentic Systems</title>
+<meta name="description" content="Learn AI, Machine Learning, Generative AI, Agentic AI, LangChain, LangGraph, and CrewAI from scratch to expert. Free tutorials, deep dives, and project walkthroughs.">
+<meta name="keywords" content="AI tutorial, machine learning, generative AI, agentic AI, LangChain, LangGraph, CrewAI, Python, deep learning">
+<meta name="author" content="NeuroAxis AI">
+<meta property="og:title" content="NeuroAxis AI — Master AI & Agentic Systems">
+<meta property="og:description" content="The #1 YouTube channel for AI, ML, Generative & Agentic AI engineering.">
+<meta property="og:type" content="website">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- AdSense placeholder meta -->
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXX">
+
+<style>
+  :root {
+    --bg: #060810;
+    --surface: #0d1117;
+    --surface2: #131923;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #f97316;
+    --text: #e8eaf0;
+    --muted: #5a6478;
+    --border: #1e2535;
+    --glow: rgba(0,229,255,0.15);
+    --font-head: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── GRID BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── ORBS ─── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.25;
+    animation: floatOrb 12s ease-in-out infinite alternate;
+  }
+  .orb-1 { width: 500px; height: 500px; background: var(--accent2); top: -150px; right: -100px; animation-delay: 0s; }
+  .orb-2 { width: 400px; height: 400px; background: var(--accent); bottom: 10%; left: -100px; animation-delay: -4s; }
+  .orb-3 { width: 300px; height: 300px; background: var(--accent3); top: 50%; right: 10%; animation-delay: -8s; }
+
+  @keyframes floatOrb {
+    from { transform: translateY(0) scale(1); }
+    to   { transform: translateY(-40px) scale(1.08); }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(6,8,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .logo span {
+    color: var(--accent);
+    display: inline-block;
+    position: relative;
+  }
+
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #000 !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; color: #000 !important; }
+
+  /* ─── SECTIONS ─── */
+  section { position: relative; z-index: 1; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 120px 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero h1 .highlight {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 .stroke {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #0090a8);
+    color: #000;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(0,229,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,229,255,0.5); }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); color: var(--text); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s 0.4s ease both;
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -1px;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+
+  /* ─── AD BANNER ─── */
+  .ad-banner {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 5%;
+    text-align: center;
+  }
+
+  .ad-placeholder {
+    background: var(--surface2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    max-width: 728px;
+    margin: 0 auto;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── TOPICS ─── */
+  .section-header {
+    text-align: center;
+    padding: 80px 5% 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+
+  /* ─── TOPIC GRID ─── */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    padding: 0 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .topic-card {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.25s, transform 0.2s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card:hover { background: var(--surface2); }
+
+  .topic-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .topic-card:hover::after { transform: scaleX(1); }
+
+  .topic-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .topic-name {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .topic-desc {
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .topic-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .tag-blue  { color: var(--accent); border-color: rgba(0,229,255,0.3); }
+  .tag-purple{ color: #a78bfa; border-color: rgba(124,58,237,0.4); }
+  .tag-orange{ color: var(--accent3); border-color: rgba(249,115,22,0.4); }
+  .tag-green { color: #34d399; border-color: rgba(52,211,153,0.3); }
+
+  /* ─── FEATURED VIDEO SECTION ─── */
+  .videos-section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .video-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .video-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+  .video-thumb {
+    background: var(--surface2);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-thumb::after {
+    content: '▶';
+    position: absolute;
+    font-size: 2rem;
+    background: rgba(0,229,255,0.9);
+    color: #000;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .video-card:hover .video-thumb::after { opacity: 1; }
+
+  .video-meta {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .video-series {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+  }
+
+  .video-title {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+  }
+
+  .video-card.large .video-title { font-size: 1.4rem; }
+
+  .video-views {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: auto;
+  }
+
+  .small-videos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* ─── AD SQUARE ─── */
+  .ad-square {
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
+
+  /* ─── SERIES SECTION ─── */
+  .series-section {
+    padding: 80px 5%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .series-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .series-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .series-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+
+  .series-num {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--border);
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .series-card:hover .series-num { color: var(--accent2); }
+
+  .series-title {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .series-ep {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── NEWSLETTER / CTA ─── */
+  .cta-section {
+    padding: 100px 5%;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .email-form input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px 18px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-form input:focus { border-color: var(--accent); }
+  .email-form input::placeholder { color: var(--muted); }
+
+  .email-form button {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .email-form button:hover { opacity: 0.85; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 60px 5% 30px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    line-height: 1.7;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--muted);
+  }
+  .social-link:hover { border-color: var(--accent); background: rgba(0,229,255,0.08); color: var(--accent); }
+
+  /* ─── TICKER ─── */
+  .ticker-wrap {
+    position: relative;
+    z-index: 1;
+    background: var(--accent);
+    overflow: hidden;
+    height: 38px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 700;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ticker-item::after { content: '◆'; opacity: 0.4; }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .video-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 2rem; }
+    .email-form { flex-direction: column; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ORBS -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">⚡</div>
+    Neuro<span>Axis</span> AI
+  </a>
+  <ul class="nav-links">
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="nav-cta">▶ Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">AI Agents</span>
+    <span class="ticker-item">LangChain</span>
+    <span class="ticker-item">LangGraph</span>
+    <span class="ticker-item">CrewAI</span>
+    <span class="ticker-item">Generative AI</span>
+    <span class="ticker-item">RAG Systems</span>
+    <span class="ticker-item">MLOps</span>
+    <span class="ticker-item">Transformers</span>
+    <span class="ticker-item">Python ML</span>
+    <span class="ticker-item">Prompt Engineering</span>
+    <span class="ticker-item">Vector Databases</span>
+    <span class="ticker-item">Fine-Tuning LLMs</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">AI Agents</span>
+    <span class="ticker-item">LangChain</span>
+    <span class="ticker-item">LangGraph</span>
+    <span class="ticker-item">CrewAI</span>
+    <span class="ticker-item">Generative AI</span>
+    <span class="ticker-item">RAG Systems</span>
+    <span class="ticker-item">MLOps</span>
+    <span class="ticker-item">Transformers</span>
+    <span class="ticker-item">Python ML</span>
+    <span class="ticker-item">Prompt Engineering</span>
+    <span class="ticker-item">Vector Databases</span>
+    <span class="ticker-item">Fine-Tuning LLMs</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+  <section class="hero">
+    <span class="hero-badge">New tutorials every week</span>
+    <h1>
+      Build the<br>
+      <span class="highlight">Future</span> of AI.<br>
+      <span class="stroke">From Zero.</span>
+    </h1>
+    <p class="hero-desc">
+      Deep-dive tutorials on Machine Learning, Generative AI, Agentic AI systems, LangChain, LangGraph, and CrewAI. No fluff — just engineering that ships.
+    </p>
+    <div class="hero-actions">
+      <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="btn-primary">
+        ▶ Watch on YouTube
+      </a>
+      <a href="#series" class="btn-secondary">
+        📚 Browse Series
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Free Tutorials</span>
+      </div>
+      <div>
+        <span class="stat-num">12</span>
+        <span class="stat-label">Topic Series</span>
+      </div>
+      <div>
+        <span class="stat-num">6</span>
+        <span class="stat-label">Core Technologies</span>
+      </div>
+      <div>
+        <span class="stat-num">∞</span>
+        <span class="stat-label">What You'll Build</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AD BANNER (728x90 leaderboard) -->
+<div class="ad-banner">
+  <!-- Google AdSense: Replace with your actual ad code -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+  <div class="ad-placeholder">[ AdSense 728×90 Leaderboard — Replace with your ad code ]</div>
+</div>
+
+<!-- TOPICS -->
+<div id="topics" style="position:relative;z-index:1;">
+  <div class="section-header fade-up">
+    <span class="section-tag">What You'll Master</span>
+    <h2 class="section-title">Six Pillars of<br>Modern AI Engineering</h2>
+    <p class="section-sub">From ML foundations to autonomous multi-agent systems — a complete learning path.</p>
+  </div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:0 5% 80px;">
+    <div class="topics-grid fade-up">
+
+      <div class="topic-card">
+        <span class="topic-icon">🧠</span>
+        <div class="topic-name">Machine Learning</div>
+        <p class="topic-desc">Supervised, unsupervised, and reinforcement learning from scratch. Scikit-learn, feature engineering, cross-validation, model evaluation.</p>
+        <span class="topic-tag tag-blue">Foundations</span>
+      </div>
+
+      <div class="topic-card">
+        <span class="topic-icon">✨</span>
+        <div class="topic-name">Generative AI</div>
+        <p class="topic-desc">LLMs, diffusion models, fine-tuning, and prompt engineering. Build text, image, and code generation pipelines.</p>
+        <span class="topic-tag tag-purple">Core AI</span>
+      </div>
+
+      <div class="topic-card">
+        <span class="topic-icon">🤖</span>
+        <div class="topic-name">Agentic AI</div>
+        <p class="topic-desc">Design autonomous AI agents with memory, planning, and tool use. ReAct, reflection loops, and production-grade deployments.</p>
+        <span class="topic-tag tag-orange">Advanced</span>
+      </div>
+
+      <div class="topic-card">
+        <span class="topic-icon">🔗</span>
+        <div class="topic-name">LangChain & LangGraph</div>
+        <p class="topic-desc">Build RAG pipelines, conversational chains, and stateful multi-agent graphs. Real projects, not just hello world.</p>
+        <span class="topic-tag tag-blue">Frameworks</span>
+      </div>
+
+      <div class="topic-card">
+        <span class="topic-icon">👥</span>
+        <div class="topic-name">CrewAI</div>
+        <p class="topic-desc">Orchestrate multi-agent crews with roles, tasks, and tools. Build research agents, automation systems, and AI workflows.</p>
+        <span class="topic-tag tag-green">Multi-Agent</span>
+      </div>
+
+      <div class="topic-card">
+        <span class="topic-icon">🚀</span>
+        <div class="topic-name">MLOps & Deployment</div>
+        <p class="topic-desc">FastAPI, Docker, CI/CD, model monitoring, and cloud deployment. Ship ML models that actually run in production.</p>
+        <span class="topic-tag tag-purple">Production</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- VIDEOS SECTION -->
+<div id="videos" style="position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="videos-section fade-up">
+    <span class="section-tag">Latest Content</span>
+    <h2 class="section-title" style="font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-top:0.5rem;">
+      Featured Tutorials
+    </h2>
+
+    <div class="video-grid">
+      <!-- LARGE FEATURED -->
+      <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="video-card large">
+        <div class="video-thumb" style="font-size:4rem;background:linear-gradient(135deg,#0d1117,#1a0a2e);">🤖</div>
+        <div class="video-meta">
+          <span class="video-series">Agentic AI Series · Ep 01</span>
+          <div class="video-title">Build Your First AI Agent from Scratch with LangGraph & Python</div>
+          <span class="video-views">🎬 Deep Dive · 45 min</span>
+        </div>
+      </a>
+
+      <!-- SMALL VIDEOS -->
+      <div class="small-videos">
+        <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="video-card">
+          <div class="video-thumb" style="font-size:2.5rem;background:linear-gradient(135deg,#0d1117,#0a1a12);">✨</div>
+          <div class="video-meta">
+            <span class="video-series">Generative AI · Ep 03</span>
+            <div class="video-title">RAG Pipeline in 30 Minutes with LangChain</div>
+            <span class="video-views">🎬 30 min</span>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="video-card">
+          <div class="video-thumb" style="font-size:2.5rem;background:linear-gradient(135deg,#0d1117,#1a0d0a);">👥</div>
+          <div class="video-meta">
+            <span class="video-series">CrewAI Series · Ep 02</span>
+            <div class="video-title">Multi-Agent Research System with CrewAI</div>
+            <span class="video-views">🎬 35 min</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- AD RECTANGLE (300x250) -->
+    <div style="margin-top:2rem;display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <!-- More video cards could go here -->
+        <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="video-card" style="display:flex;flex-direction:row;gap:1rem;padding:1rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);text-decoration:none;color:var(--text);transition:border-color 0.2s;">
+          <div style="width:120px;height:70px;background:linear-gradient(135deg,#0d1117,#0a1220);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🔗</div>
+          <div>
+            <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;">LangChain · Ep 05</span>
+            <div style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;margin-top:0.25rem;line-height:1.3;">LangChain Agents + Tool Calling Deep Dive</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- AdSense 300x250 Box -->
+      <div>
+        <!-- Replace with real AdSense code -->
+        <div class="ad-square" style="width:300px;">[ AdSense 300×250 ]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERIES SECTION -->
+<div id="series" style="position:relative;z-index:1;">
+  <div class="series-section fade-up">
+    <div class="series-inner">
+      <div style="text-align:center;margin-bottom:0;">
+        <span class="section-tag">Structured Learning</span>
+        <h2 class="section-title" style="font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;">
+          Learning Series
+        </h2>
+        <p class="section-sub">Step-by-step series built to take you from concept to deployed system.</p>
+      </div>
+
+      <div class="series-grid">
+        <div class="series-card">
+          <span class="series-num">01</span>
+          <div class="series-title">ML Foundations</div>
+          <span class="series-ep">12 Episodes · Beginner</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">02</span>
+          <div class="series-title">Generative AI Engineering</div>
+          <span class="series-ep">10 Episodes · Intermediate</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">03</span>
+          <div class="series-title">LangChain Mastery</div>
+          <span class="series-ep">8 Episodes · Intermediate</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">04</span>
+          <div class="series-title">Agentic AI Systems</div>
+          <span class="series-ep">10 Episodes · Advanced</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">05</span>
+          <div class="series-title">LangGraph in Depth</div>
+          <span class="series-ep">8 Episodes · Advanced</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">06</span>
+          <div class="series-title">CrewAI & Multi-Agent</div>
+          <span class="series-ep">6 Episodes · Advanced</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">07</span>
+          <div class="series-title">MLOps & Deployment</div>
+          <span class="series-ep">8 Episodes · Production</span>
+        </div>
+        <div class="series-card">
+          <span class="series-num">08</span>
+          <div class="series-title">End-to-End Projects</div>
+          <span class="series-ep">Ongoing · All Levels</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA / NEWSLETTER -->
+<div style="position:relative;z-index:1;">
+  <section class="cta-section fade-up">
+    <span class="section-tag">Stay Ahead</span>
+    <h2>Never Miss a<br><span style="background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tutorial Drop</span></h2>
+    <p>Join the NeuroAxis AI community. Get notified when new tutorials, series, and projects go live.</p>
+    <div class="email-form">
+      <input type="email" placeholder="your@email.com">
+      <button type="button">Subscribe Free</button>
+    </div>
+    <p style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);margin-top:1rem;letter-spacing:0.5px;">No spam. Unsubscribe anytime.</p>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon">⚡</div>
+          Neuro<span>Axis</span> AI
+        </a>
+        <p>The best AI/ML YouTube channel for engineers who want to build real systems, not just understand theory.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="#">Machine Learning</a></li>
+          <li><a href="#">Generative AI</a></li>
+          <li><a href="#">Agentic AI</a></li>
+          <li><a href="#">LangChain</a></li>
+          <li><a href="#">LangGraph</a></li>
+          <li><a href="#">CrewAI</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">All Series</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">GitHub Code</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+
+      <div id="about" class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Channel</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Ad leaderboard in footer area -->
+    <div style="margin-bottom:2rem;">
+      <!-- <ins class="adsbygoogle" ... ></ins> -->
+      <div class="ad-placeholder" style="max-width:100%;border-radius:8px;">[ AdSense 728×90 Footer Banner — Replace with your ad code ]</div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 NeuroAxis AI. All rights reserved.</span>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@NeuroAxisAi" target="_blank" class="social-link" title="YouTube">▶</a>
+        <a href="https://github.com" target="_blank" class="social-link" title="GitHub">⌥</a>
+        <a href="https://twitter.com" target="_blank" class="social-link" title="Twitter/X">✕</a>
+        <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn">in</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Email subscribe
+  document.querySelector('.email-form button').addEventListener('click', () => {
+    const input = document.querySelector('.email-form input');
+    if (input.value && input.value.includes('@')) {
+      input.value = '';
+      input.placeholder = '✓ Subscribed! Welcome aboard.';
+      setTimeout(() => { input.placeholder = 'your@email.com'; }, 3000);
+    } else {
+      input.style.borderColor = 'var(--accent3)';
+      input.placeholder = 'Please enter a valid email';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'your@email.com';
+      }, 2500);
+    }
+  });
+</script>
+</body>
+</html>
